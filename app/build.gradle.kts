@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.erp_qr"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.erp_qr"
@@ -40,6 +40,17 @@ android {
 
 dependencies {
 
+
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+//    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
+    implementation(libs.androidx.activity.v193)
+    implementation(libs.androidx.fragment)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
