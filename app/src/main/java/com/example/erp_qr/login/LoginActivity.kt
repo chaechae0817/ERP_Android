@@ -1,4 +1,4 @@
-package com.example.erp_qr.Login
+package com.example.erp_qr.login
 
 import android.content.Intent
 import android.os.Bundle
