@@ -1,4 +1,4 @@
-package com.example.erp_qr.Login
+package com.example.erp_qr.login
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +17,7 @@ class LoginViewModel : ViewModel(){
     var errorMessage: MutableLiveData<String> = MutableLiveData("")
 
 
-    fun loginSucess(){
+    fun loginSuccess(){
         RetrofitApplication.networkService.login(employeeNumber.value.toString(),email.value.toString()).clone()?.enqueue(object :
             Callback<Map<String, Any>> {
             override fun onResponse(call: Call<Map<String, Any>>, response: Response<Map<String, Any>>) {

@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.erp_qr.Login.LoginViewModel" />
+            type="com.example.erp_qr.login.LoginViewModel" />
         <variable
             name="activity"
-            type="com.example.erp_qr.Login.LoginActivity" />
+            type="com.example.erp_qr.login.LoginActivity" />
     </data>
 
     <RelativeLayout
