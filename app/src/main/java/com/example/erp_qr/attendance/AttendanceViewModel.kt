@@ -10,19 +10,19 @@ class AttendanceViewModel : ViewModel(){
     private val _attendanceData = MutableLiveData<List<Attendance>>()
     val attendanceData: LiveData<List<Attendance>> get() = _attendanceData
 
-    init {
-        loadAttendanceData()
-    }
-
-    private fun loadAttendanceData() {
-        RetrofitApplication.networkService.getAttendanceList()
-        val data = listOf(
-            Attendance("2024-12-06", "09:08 AM", "06:05 PM", "08:13"),
-            Attendance("2024-12-07", "09:08 AM", "06:05 PM", "08:13"),
-            Attendance("2024-12-08", "09:08 AM", "06:05 PM", "08:13")
-        )
-        _attendanceData.value = data
-    }
+//    init {
+//        loadAttendanceData()
+//    }
+//
+//    private fun loadAttendanceData() {
+//        RetrofitApplication.networkService.getAttendanceList()
+//        val data = listOf(
+//            Attendance("2024-12-06", "09:08 AM", "06:05 PM", "08:13"),
+//            Attendance("2024-12-07", "09:08 AM", "06:05 PM", "08:13"),
+//            Attendance("2024-12-08", "09:08 AM", "06:05 PM", "08:13")
+//        )
+//        _attendanceData.value = data
+//    }
 
 
 
