@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
             if(it) {
                 finish()
                 startActivity(Intent(this, MainActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
         }
     }

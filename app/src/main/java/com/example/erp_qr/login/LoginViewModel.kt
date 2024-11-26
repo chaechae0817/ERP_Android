@@ -12,7 +12,6 @@ class LoginViewModel : ViewModel(){
 
     var employeeNumber: MutableLiveData<String> = MutableLiveData("")
     var email: MutableLiveData<String> = MutableLiveData("")
-
     var loginSuccess: MutableLiveData<Boolean> = MutableLiveData(false)
     var errorMessage: MutableLiveData<String> = MutableLiveData("")
 
