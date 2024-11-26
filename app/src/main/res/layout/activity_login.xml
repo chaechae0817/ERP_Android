@@ -76,7 +76,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="#424242"
-                android:onClick="@{() -> viewModel.loginSucess()}"
+                android:onClick="@{() -> viewModel.Loginsucess()}"
                 android:text="로그인"
                 android:textColor="@color/white"
                 android:textSize="18sp"
