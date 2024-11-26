@@ -17,8 +17,8 @@ class LoginViewModel : ViewModel(){
     var errorMessage: MutableLiveData<String> = MutableLiveData("")
 
 
-    fun loginSuccess(){
-        RetrofitApplication.networkService.login(employeeNumber.value.toString(),email.value.toString()).clone()?.enqueue(object :
+    fun Loginsucess(){
+        RetrofitApplication.networkService.login(employeeNumber.value.toString(),email.value.toString()).clone().enqueue(object :
             Callback<Map<String, Any>> {
             override fun onResponse(call: Call<Map<String, Any>>, response: Response<Map<String, Any>>) {
                 if(response.isSuccessful){
