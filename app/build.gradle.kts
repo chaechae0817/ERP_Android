@@ -49,7 +49,12 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
-    implementation(libs.androidx.activity.v193)
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
+    implementation("androidx.core:core:1.13.0") {
+        exclude(group = "com.android.support", module = "support-compat")
+    }
+
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
