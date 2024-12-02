@@ -1,4 +1,4 @@
-package com.example.erp_qr.Attendance
+package com.example.erp_qr.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
