@@ -1,0 +1,110 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="attendance"
+            type="com.example.erp_qr.data.AttendanceRecordDTO" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="#F2F4F7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:id="@+id/DateLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/attendanceTypeTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{attendance.attendanceType}" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{attendance.date}"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/check_in_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="출근 시간"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/checkInTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{attendance.checkInTime}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/check_out_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="퇴근 시간"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/checkOutTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{attendance.checkOutTime}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalWorkTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총 일한 시간"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/totalWorkHoursTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{attendance.totalWorkHours}" />
+        </LinearLayout>
+
+        <!-- Add other fields similarly -->
+
+    </LinearLayout>
+</layout>

@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import com.example.erp_qr.MainActivity
 import com.example.erp_qr.R
 import com.example.erp_qr.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     val loginViewModel: LoginViewModel? by viewModels()
@@ -27,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
             if(it) {
                 finish()
                 startActivity(Intent(this, MainActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
         }
     }
