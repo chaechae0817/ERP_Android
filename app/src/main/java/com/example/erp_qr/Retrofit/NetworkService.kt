@@ -1,6 +1,8 @@
 package com.example.erp_qr.Retrofit
 
-import com.example.erp_qr.data.AttendanceRecord
+import com.example.erp_qr.data.AttendanceRecordDTO
+import com.example.erp_qr.data.SalaryDTO
+import com.example.erp_qr.data.VacationDTO
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -14,8 +16,17 @@ interface NetworkService {
     fun login(@Field("employeeNumber") employeeNumber: String,
               @Field("email") email: String): Call<Map<String,Any>>
 
-    @GET("/android/list/{employeeId}/{month}")
-    fun getAttendanceList(@Path("employeeId") employeeId: String,@Path("month") month: String): Call<List<AttendanceRecord>>
+    //직원의 근태 조회  EX) localhost:8080/record/android/list/11/10
+    @GET("/record/android/list/{employeeId}/{month}")
+    fun getAttendanceList(@Path("employeeId") employeeId: String,@Path("month") month: String): Call<List<AttendanceRecordDTO>>
+
+    //직원의 휴가 조회
+    @GET("/vacation/android/{employeeId}")
+    fun getVacationList(@Path("employeeId") employeeId: String): Call<List<VacationDTO>>
+
+    //급여 정보 가져오기
+    @GET("/salary/android/{employeeId}/{month}")
+    fun getSalaryList(@Path("employeeId") employeeId: String,@Path("month") month: String): Call<SalaryDTO>
 
 
 
