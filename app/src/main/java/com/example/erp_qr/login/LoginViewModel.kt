@@ -4,11 +4,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.erp_qr.Retrofit.RetrofitApplication
+import com.example.erp_qr.data.repository.LoginRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel(){
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository
+): ViewModel(){
 
     var employeeNumber: MutableLiveData<String> = MutableLiveData("")
     var email: MutableLiveData<String> = MutableLiveData("")
@@ -26,8 +32,9 @@ class LoginViewModel : ViewModel(){
                         val success = responseBody["success"] as? Boolean ?: false
                         loginSuccess.value = success
 
-                        if (!success) {
-                            errorMessage.value = "Login failed. Check credentials."
+                        if (success) {
+                            val employeeId = responseBody["employeeId"]?.toString() ?:""
+                            loginRepository.saveLoginData(employeeId,employeeNumber.value.toString(),email.value.toString())
                         }
                     } else {
                         errorMessage.value = "Server response is empty."
