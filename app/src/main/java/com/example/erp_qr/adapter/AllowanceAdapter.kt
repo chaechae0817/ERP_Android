@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.erp_qr.databinding.ItemAllowanceBinding
 
-
 class AllowanceAdapter : ListAdapter<Map.Entry<String, Double>, AllowanceAdapter.AllowanceViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllowanceViewHolder {
