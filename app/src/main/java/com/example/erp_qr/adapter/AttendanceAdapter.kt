@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.erp_qr.data.AttendanceRecordDTO
 import com.example.erp_qr.databinding.ItemAttendanceBinding
 
-class AttendanceAdapter :
-    ListAdapter<AttendanceRecordDTO, AttendanceAdapter.AttendanceViewHolder>(DiffCallback()) {
+class AttendanceAdapter : ListAdapter<AttendanceRecordDTO, AttendanceAdapter.AttendanceViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttendanceViewHolder {
         val binding = ItemAttendanceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
