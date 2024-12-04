@@ -35,7 +35,7 @@ object CalendarDecorators {
                         ForegroundColorSpan(
                             ContextCompat.getColor(
                                 context,
-                                R.color.main_color
+                                R.color.black
                             )
                         )
                     )
@@ -59,12 +59,18 @@ object CalendarDecorators {
 
     fun startAndEndDateDecorator(context: Context, date: CalendarDay,isStart: Boolean): DayViewDecorator{
         return object : DayViewDecorator {
-            private val selectedDayDrawable = ContextCompat.getDrawable(context,R.drawable.date_circle)
+            private val spanColor = if (isStart) {
+                ContextCompat.getColor(context, R.color.select_date_color)
+            } else {
+                ContextCompat.getColor(context, R.color.select_date_color)
+            }
             override fun shouldDecorate(day: CalendarDay): Boolean {
                 return day == date
             }
             override fun decorate(view: DayViewFacade) {
-                selectedDayDrawable?.let { view.setSelectionDrawable(it) }
+                view.addSpan(ForegroundColorSpan(spanColor)) // 텍스트 색상 변경
+                view.addSpan(object :
+                    android.text.style.StyleSpan(android.graphics.Typeface.BOLD) {}) // 굵게 표시
             }
         }
     }
