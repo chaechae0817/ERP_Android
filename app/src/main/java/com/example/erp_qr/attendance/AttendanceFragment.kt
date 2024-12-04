@@ -50,28 +50,26 @@ class AttendanceFragment : Fragment() {
         // 캘린더 범위 선택 리스너
         binding.calendarView.setOnRangeSelectedListener(OnRangeSelectedListener { _, dates ->
             if (dates.isNotEmpty()) {
-                val startDate = dates.first().date // 범위의 시작 날짜
-                val endDate = dates.last().date   // 범위의 끝 날짜
-                // 기존 데코레이터 초기화
-                binding.calendarView.removeDecorators()
 
-                // 오늘 날짜 데코레이터 다시 추가 (초기화로 삭제된 경우 복구)
+                binding.calendarView.removeDecorators()
                 binding.calendarView.addDecorator(CalendarDecorators.todayDecorator(requireContext()))
 
+                val startDate = dates.first() // 범위의 시작 날짜
+                val endDate = dates.last()   // 범위의 끝 날짜
+
                 // 시작/끝 날짜 데코레이터 추가
-                binding.calendarView.addDecorator(CalendarDecorators.startAndEndDateDecorator(requireContext(), dates.first(), true))
-                binding.calendarView.addDecorator(CalendarDecorators.startAndEndDateDecorator(requireContext(), dates.last(), false))
+                binding.calendarView.addDecorator(CalendarDecorators.rangeDecorator(requireContext(), startDate, endDate))
+                binding.calendarView.addDecorator(CalendarDecorators.startAndEndDateDecorator(requireContext(), startDate, true))
+                binding.calendarView.addDecorator(CalendarDecorators.startAndEndDateDecorator(requireContext(), endDate, false))
 
-                // 범위 데코레이터 추가
-                binding.calendarView.addDecorator(CalendarDecorators.rangeDecorator(requireContext(), dates.first(), dates.last()))
-
+                viewModel.filterAttendanceByDateRange(startDate.date,endDate.date)
             }
         })
         // 단일 날짜 선택 리스너
         binding.calendarView.setOnDateChangedListener { _, date, selected ->
             binding.calendarView.addDecorator(CalendarDecorators.dayDecorator(requireContext()))
             if(selected) {
-                binding.calendarView.setSelectionColor(Color.BLUE)
+                binding.calendarView.setSelectionColor(Color.RED)
                 val selectedDate = date.date // 선택된 날짜 (LocalDate 형식)
                 viewModel.filterAttendanceByDate(selectedDate) // ViewModel에 선택된 날짜 전달
             } else{
