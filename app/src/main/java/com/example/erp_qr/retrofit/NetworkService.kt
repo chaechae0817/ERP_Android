@@ -1,4 +1,4 @@
-package com.example.erp_qr.Retrofit
+package com.example.erp_qr.retrofit
 
 import com.example.erp_qr.data.AttendanceRecordDTO
 import com.example.erp_qr.data.NotificationDTO

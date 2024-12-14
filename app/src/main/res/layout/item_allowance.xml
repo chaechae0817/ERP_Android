@@ -20,13 +20,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{allowance.key}" />
+            android:fontFamily="monospace"
+            android:text="@{allowance.key}"
+            android:textColor="#424242"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Allowance 금액 -->
         <TextView
             android:id="@+id/allowanceAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(allowance.value)}" />
+            android:fontFamily="monospace"
+            android:text="@{String.valueOf(allowance.value)}"
+            android:textColor="#424242"
+            android:textSize="20sp" />
     </LinearLayout>
 </layout>

@@ -28,14 +28,16 @@
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
             app:mcv_firstDayOfWeek="monday"
-            app:mcv_leftArrow="@drawable/ic_arrow_left"
-            app:mcv_rightArrow="@drawable/ic_arrow_right_cal"
+            app:mcv_leftArrow="@drawable/mcv_action_previous"
+            app:mcv_rightArrow="@drawable/mcv_action_next"
             app:mcv_selectionMode="range"
             app:mcv_showOtherDates="all"
-            app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
+
             app:mcv_weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
 
         <!-- RecyclerView -->
@@ -45,6 +47,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_attendance"
+            tools:itemCount="5"/>
     </LinearLayout>
 </layout>

@@ -3,7 +3,7 @@ package com.example.erp_qr.login
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.erp_qr.Retrofit.RetrofitApplication
+import com.example.erp_qr.retrofit.RetrofitApplication
 import com.example.erp_qr.data.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call

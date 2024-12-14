@@ -11,7 +11,7 @@ data class NotificationDTO(
     // 타입에 따라 변환된 텍스트를 제공
     val displayType: String
         get() = when (type) {
-            "vacation_pending" -> "휴가 신청 완료"
+            "vacation_pending" -> "휴가 신청"
             "vacation_approve" -> "휴가 승인"
             "attendance_checkIn" -> "출근"
             "attendance_checkout" -> "퇴근"
