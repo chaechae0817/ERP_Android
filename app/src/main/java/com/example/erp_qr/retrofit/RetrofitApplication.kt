@@ -1,4 +1,4 @@
-package com.example.erp_qr.Retrofit
+package com.example.erp_qr.retrofit
 
 import android.app.Application
 import com.google.gson.GsonBuilder
@@ -10,7 +10,7 @@ import java.lang.reflect.Type
 
 class RetrofitApplication : Application() {
     companion object{
-        val BASE_URL = "http://172.30.1.8:8080"
+        val BASE_URL = "http://localhost:8080"
 
         private val nullOnEmptyConverterFactory = object : Converter.Factory() {
             fun converterFactory() = this

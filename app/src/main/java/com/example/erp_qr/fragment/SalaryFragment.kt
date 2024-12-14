@@ -55,16 +55,24 @@ class SalaryFragment : Fragment() {
                 deductionAdapter.submitList(it.deductionDetails.entries.toList())
             }
         }
-
-        // Allowance RecyclerView 표시 여부
-        viewModel.allowanceVisible.observe(viewLifecycleOwner) { isVisible ->
-            binding.allowanceRv.visibility = if (isVisible) View.VISIBLE else View.GONE
+        viewModel.selectedButton.observe(viewLifecycleOwner) {
+            if (it == "allowance") {
+                Log.d("SalaryFragment", "setObserve: allowance")
         }
-
-        // Deduction RecyclerView 표시 여부
-        viewModel.deductionVisible.observe(viewLifecycleOwner) { isVisible ->
-            binding.deductionRv.visibility = if (isVisible) View.VISIBLE else View.GONE
+            if (it == "deduction") {
+                Log.d("SalaryFragment", "setObserve: deduction")
         }
+    }
+
+//        // Allowance RecyclerView 표시 여부
+//        viewModel.allowanceVisible.observe(viewLifecycleOwner) { isVisible ->
+//            binding.allowanceRv.visibility = if (isVisible) View.VISIBLE else View.GONE
+//        }
+//
+//        // Deduction RecyclerView 표시 여부
+//        viewModel.deductionVisible.observe(viewLifecycleOwner) { isVisible ->
+//            binding.deductionRv.visibility = if (isVisible) View.VISIBLE else View.GONE
+//        }
 
     }
 }

@@ -5,11 +5,14 @@
         <variable
             name="viewModel"
             type="com.example.erp_qr.salary.SalaryViewModel" />
+
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -24,9 +27,9 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentRight="true"
                 android:background="@android:color/transparent"
+                android:onClick="@{() -> viewModel.changeMonth(1)}"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/mcv_action_next"
-                android:onClick="@{() -> viewModel.changeMonth(1)}"/>
+                app:srcCompat="@drawable/mcv_action_next" />
 
             <ImageButton
                 android:id="@+id/monthLBtn"
@@ -35,9 +38,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="false"
                 android:background="@android:color/transparent"
+                android:onClick="@{() -> viewModel.changeMonth(-1)}"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/mcv_action_previous"
-                android:onClick="@{() -> viewModel.changeMonth(-1)}"/>
+                app:srcCompat="@drawable/mcv_action_previous" />
 
             <TextView
                 android:id="@+id/monthTv"
@@ -53,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:layout_margin="30dp"
-            android:background="#F0F2F5"
+            android:background="@drawable/round_background"
             android:orientation="vertical">
 
             <TextView
@@ -86,25 +89,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/allowanceBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:text="추가 수당"
-                android:onClick="@{() -> viewModel.showAllowances()}"
-                />
 
-            <Button
-                android:id="@+id/deductionBtn"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/allowanceBtn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="공제 내역"
-                android:onClick="@{() -> viewModel.showDeductions()}"
-                />
+                android:onClick="@{() -> viewModel.selectAllowance()}"
+                android:text="추가 수당"
+                android:textColor="@{viewModel.allowanceState}"
+                app:backgroundTint="@{viewModel.allowanceState}"
+                app:cornerRadius="15dp"
+                app:strokeColor="@color/selectedBtn"
+                app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deductionBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.selectDeduction()}"
+                android:text="공제 사항"
+                android:textColor="@{viewModel.deductionState}"
+                app:backgroundTint="@{viewModel.deductionState}"
+                app:cornerRadius="15dp"
+                app:strokeColor="@color/selectedBtn"
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
 
@@ -117,6 +129,7 @@
                 android:id="@+id/allowanceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:fontFamily="monospace"
                 android:text="@{viewModel.salaryData.totalAllowance}"
@@ -128,6 +141,7 @@
                 android:id="@+id/deductionTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:fontFamily="monospace"
                 android:text="@{viewModel.salaryData.totalDeductions}"
@@ -149,18 +163,22 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:text="세부 내역"
-            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/allowanceRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.allowanceState? View.VISIBLE : View.GONE}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/deductionRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.deductionState ? View.VISIBLE : View.GONE}" />
+
 
     </LinearLayout>
 </layout>
