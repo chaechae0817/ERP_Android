@@ -14,14 +14,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class VacationFragment : Fragment() {
-
-    private var _binding: FragmentVacationBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentVacationBinding
     private val viewModel: VacationViewModel by viewModels()
     private val vacationAdapter by lazy { VacationAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentVacationBinding.inflate(inflater, container, false)
+        binding = FragmentVacationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,10 +40,5 @@ class VacationFragment : Fragment() {
         viewModel.vacationData.observe(viewLifecycleOwner) { vacationList ->
             vacationAdapter.submitList(vacationList)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

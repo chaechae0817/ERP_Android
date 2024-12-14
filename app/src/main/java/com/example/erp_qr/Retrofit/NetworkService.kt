@@ -1,6 +1,7 @@
 package com.example.erp_qr.Retrofit
 
 import com.example.erp_qr.data.AttendanceRecordDTO
+import com.example.erp_qr.data.NotificationDTO
 import com.example.erp_qr.data.SalaryDTO
 import com.example.erp_qr.data.VacationDTO
 import retrofit2.Call
@@ -29,5 +30,11 @@ interface NetworkService {
     fun getSalaryList(@Path("employeeId") employeeId: String,@Path("month") month: String): Call<SalaryDTO>
 
 
+    //안읽은 알람
+    @GET("/notification/unread/{employeeId}")
+    fun getUnreadNotificationCount(@Path("employeeId") employeeId: String): Call<List<NotificationDTO>>
+
+    @POST("/notification/read/{notificationId}")
+    fun markNotificationAsRead(@Path("notificationId") notificationId: Long): Call<Void>
 
 }

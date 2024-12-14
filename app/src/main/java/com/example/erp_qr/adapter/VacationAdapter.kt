@@ -17,9 +17,9 @@ class VacationAdapter : ListAdapter<VacationDTO, VacationAdapter.VacationViewHol
             binding.vacation = vacation
             binding.tvStatus.setTextColor(
                 when (vacation.status) {
-                    "승인" -> itemView.context.getColor(android.R.color.holo_green_dark)
-                    "보류" -> itemView.context.getColor(android.R.color.holo_orange_dark)
-                    "거절" -> itemView.context.getColor(android.R.color.holo_red_dark)
+                    "APPROVED" -> itemView.context.getColor(android.R.color.holo_green_dark)
+                    "PENDING" -> itemView.context.getColor(android.R.color.holo_orange_dark)
+                    "REJECTED" -> itemView.context.getColor(android.R.color.holo_red_dark)
                     else -> itemView.context.getColor(android.R.color.darker_gray)
                 }
             )

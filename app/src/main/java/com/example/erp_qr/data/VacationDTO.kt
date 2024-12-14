@@ -11,4 +11,13 @@ data class VacationDTO(
     val endDate: String,       // 마감일
     val reason: String,        // 사유
     val status: String         // 처리 상태 (승인, 보류, 거절)
-)
+){
+    val displayStatus: String
+        get() = when (status) {
+            "APPROVED" -> "승인"
+            "PENDING" -> "보류"
+            "REJECTED" -> "거절"
+            else -> "보류"
+        }
+
+}
