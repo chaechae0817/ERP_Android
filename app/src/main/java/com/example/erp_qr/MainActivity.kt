@@ -1,57 +1,46 @@
 package com.example.erp_qr
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.erp_qr.attendance.AttendanceFragment
-import com.example.erp_qr.qr.MainFragment
+import com.example.erp_qr.databinding.ActivityMainBinding
+import com.example.erp_qr.databinding.NavHeaderBinding
 import com.example.erp_qr.fragment.SalaryFragment
 import com.example.erp_qr.fragment.VacationFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import com.example.erp_qr.login.LoginActivity
+import com.example.erp_qr.notification.NotificationActivity
+import com.example.erp_qr.qr.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var drawerLayout: DrawerLayout
-
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUnreadNotificationCountAndData()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        // 상단바 설정
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
-        //drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        setSupportActionBar(binding.toolbar)
 
-        // Drawer 설정
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                //R.id.nav_profile -> loadFragment(ProfileFragment())
-                //R.id.nav_settings -> loadFragment(SettingsFragment())
-                R.id.nav_logout -> logout()
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-
-        // 하단 네비게이션 설정
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> loadFragment(MainFragment())
-                R.id.nav_vacation -> loadFragment(VacationFragment())
-                R.id.nav_attendance -> loadFragment(AttendanceFragment())
-                R.id.nav_salary -> loadFragment(SalaryFragment())
-            }
-            true
-        }
+        setupNavigationHeader()
+        setupDrawerNavigation()
+        setupBottomNavigation()
+        setObserve()
 
         // 초기 화면 설정
         if (savedInstanceState == null) {
@@ -65,8 +54,59 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun logout() {
-        // 로그아웃 처리 로직
-        // 예: SharedPreferences 초기화 후 로그인 화면으로 이동
+
+    private fun setupNavigationHeader() {
+        val navigationView = binding.navigationView
+        val headerView = navigationView.getHeaderView(0)
+
+        val headerBinding = NavHeaderBinding.bind(headerView) // 바인딩 객체 생성
+        headerBinding.viewModel = viewModel
+        headerBinding.lifecycleOwner = this
+    }
+
+    private fun setObserve(){
+        viewModel.isLoggedOut.observe(this){
+            if(it) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+        viewModel.notification.observe(this){
+            if(it) {
+                startActivity(Intent(this,NotificationActivity::class.java))
+            }
+        }
+        viewModel.unreadCount.observe(this) { unreadCount ->
+            // 배지 알림 상태 업데이트
+            Log.d("MainViewModel", "Unread count updated: $unreadCount")
+            binding.badgeNotification.text = unreadCount.toString()
+            binding.badgeNotification.visibility = if (unreadCount > 0) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun setupDrawerNavigation() {
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_logout -> viewModel.logout()
+                // 다른 메뉴 처리
+            }
+            binding.drawLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> loadFragment(MainFragment())
+                R.id.nav_vacation -> loadFragment(VacationFragment())
+                R.id.nav_attendance -> loadFragment(AttendanceFragment())
+                R.id.nav_salary -> loadFragment(SalaryFragment())
+            }
+            true
+        }
     }
 }

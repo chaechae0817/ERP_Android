@@ -1,28 +1,53 @@
 package com.example.erp_qr.vaction
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.erp_qr.Retrofit.RetrofitApplication
 import com.example.erp_qr.data.VacationDTO
+import com.example.erp_qr.data.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class VacationViewModel @Inject constructor() : ViewModel() {
+class VacationViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
 
     private val _vacationData = MutableLiveData<List<VacationDTO>>()
     val vacationData: LiveData<List<VacationDTO>> get() = _vacationData
 
     init {
-        loadVacationData()
+        val data = loginRepository.getLoginData()
+        val employeeId = data["employeeId"] ?: "No ID Found"
+        
+        loadVacationData(employeeId)
     }
 
-    private fun loadVacationData() {
-        val sampleData = listOf(
-            VacationDTO(1, 11, "홍길동", "이사", "인사부", "병가", "11-06", "11-09", "아퍼", "승인"),
-            VacationDTO(2, 11, "홍길동", "이사", "인사부", "병가", "10-27", "10-29", "감기", "보류"),
-            VacationDTO(3, 11, "홍길동", "이사", "인사부", "연가", "11-24", "11-28", "휴가", "거절")
-        )
-        _vacationData.value = sampleData
+    private fun loadVacationData(employeeId: String) {
+        RetrofitApplication.networkService.getVacationList(employeeId).clone()?.enqueue(object : Callback<List<VacationDTO>>{
+            override fun onResponse(call: Call<List<VacationDTO>>, response: Response<List<VacationDTO>>) {
+               if(response.isSuccessful){
+                   if(response.body() != null){
+                       _vacationData.value = response.body()
+                   }else{
+                       Log.d(TAG, "onResponse: responseBody is null : ${response.body()}")
+                   }
+               }else{
+                   Log.d(TAG, "onResponse: Response Failed: Code = ${response.code()}, Message = ${response.message()}, ErrorBody = ${response.errorBody()?.string()}")
+               }
+            }
+
+            override fun onFailure(call: Call<List<VacationDTO>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
+        })
+    }
+    
+    companion object{
+        private const val TAG = "VacationViewModel"
     }
 }
