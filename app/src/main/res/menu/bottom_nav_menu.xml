@@ -2,7 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:icon="@drawable/ic_home"
+        android:scaleType="fitCenter"
         android:title="Home" />
     <item
         android:id="@+id/nav_vacation"
