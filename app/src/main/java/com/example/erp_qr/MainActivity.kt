@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.erp_qr.attendance.AttendanceFragment
 import com.example.erp_qr.databinding.ActivityMainBinding
 import com.example.erp_qr.databinding.NavHeaderBinding
@@ -62,6 +63,24 @@ class MainActivity : AppCompatActivity() {
         val headerBinding = NavHeaderBinding.bind(headerView) // 바인딩 객체 생성
         headerBinding.viewModel = viewModel
         headerBinding.lifecycleOwner = this
+
+        // SharedPreferences에서 이미지 경로 가져오기
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("profile_image_path", "/storage/emulated/0/Download/profile_image.jpg")
+        editor.apply()
+        val imagePath = sharedPreferences.getString("profile_image_path", null)
+
+        // Glide를 사용하여 이미지 표시
+        if (imagePath != null) {
+            Glide.with(this)
+                .load(imagePath) // 저장된 파일 경로
+                .into(headerBinding.navProfileImage) // 이미지 뷰에 로드
+
+        } else {
+            // 기본 이미지 설정 (이미지 경로가 없을 경우)
+            headerBinding.navProfileImage.setImageResource(R.drawable.profile_placeholder)
+        }
     }
 
     private fun setObserve(){
@@ -101,10 +120,22 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> loadFragment(MainFragment())
-                R.id.nav_vacation -> loadFragment(VacationFragment())
-                R.id.nav_attendance -> loadFragment(AttendanceFragment())
-                R.id.nav_salary -> loadFragment(SalaryFragment())
+                R.id.nav_home -> {
+                    loadFragment(MainFragment())
+                    binding.toolbar.title = "모바일 열람"
+                }
+                R.id.nav_vacation -> {
+                    loadFragment(VacationFragment())
+                    binding.toolbar.title = "휴가 열람"
+                }
+                R.id.nav_attendance -> {
+                    loadFragment(AttendanceFragment())
+                    binding.toolbar.title = "근태 열람"
+                }
+                R.id.nav_salary -> {
+                    loadFragment(SalaryFragment())
+                    binding.toolbar.title = "급여 열람"
+                }
             }
             true
         }

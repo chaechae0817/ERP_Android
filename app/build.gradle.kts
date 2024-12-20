@@ -45,23 +45,22 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
-    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.zxing:core:3.5.2")
-    implementation("androidx.core:core:1.13.0") {
-        exclude(group = "com.android.support", module = "support-compat")
-    }
-
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
-    implementation ("com.jakewharton.threetenabp:threetenabp:1.4.4")
+    implementation("androidx.core:core:1.13.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-compiler:2.50")
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.4.6")
 
 
     implementation(libs.androidx.fragment)
