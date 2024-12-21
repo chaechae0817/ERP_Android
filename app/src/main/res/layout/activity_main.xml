@@ -20,9 +20,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- 상단바 -->
-
-            <!-- MainFragment를 표시할 컨테이너 -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
