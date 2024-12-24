@@ -16,14 +16,6 @@
         android:padding="16dp">
 
         <!-- src에는 로그인된 자신의 사진이 들어갈수있게 아래는 예시 -->
-        <ImageView
-            android:id="@+id/nav_profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/circle_background"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_placeholder"/>
         <TextView
             android:id="@+id/nav_name"
             android:layout_width="wrap_content"

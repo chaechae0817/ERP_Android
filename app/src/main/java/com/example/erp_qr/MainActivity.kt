@@ -63,24 +63,6 @@ class MainActivity : AppCompatActivity() {
         val headerBinding = NavHeaderBinding.bind(headerView) // 바인딩 객체 생성
         headerBinding.viewModel = viewModel
         headerBinding.lifecycleOwner = this
-
-        // SharedPreferences에서 이미지 경로 가져오기
-        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("profile_image_path", "/storage/emulated/0/Download/profile_image.jpg")
-        editor.apply()
-        val imagePath = sharedPreferences.getString("profile_image_path", null)
-
-        // Glide를 사용하여 이미지 표시
-        if (imagePath != null) {
-            Glide.with(this)
-                .load(imagePath) // 저장된 파일 경로
-                .into(headerBinding.navProfileImage) // 이미지 뷰에 로드
-
-        } else {
-            // 기본 이미지 설정 (이미지 경로가 없을 경우)
-            headerBinding.navProfileImage.setImageResource(R.drawable.profile_placeholder)
-        }
     }
 
     private fun setObserve(){
