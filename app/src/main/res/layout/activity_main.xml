@@ -75,9 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/white"
+                android:shadowColor="@color/white"
                 app:labelVisibilityMode="labeled"
                 app:itemIconTint="@color/bottom_nav_icon_selector"
                 app:itemTextColor="@color/bottom_nav_text_selector"
+                app:itemRippleColor="@android:color/transparent"
                 app:menu="@menu/bottom_nav_menu" />
         </LinearLayout>
 

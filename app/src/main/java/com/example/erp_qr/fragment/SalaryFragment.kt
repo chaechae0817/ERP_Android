@@ -64,15 +64,5 @@ class SalaryFragment : Fragment() {
         }
     }
 
-//        // Allowance RecyclerView 표시 여부
-//        viewModel.allowanceVisible.observe(viewLifecycleOwner) { isVisible ->
-//            binding.allowanceRv.visibility = if (isVisible) View.VISIBLE else View.GONE
-//        }
-//
-//        // Deduction RecyclerView 표시 여부
-//        viewModel.deductionVisible.observe(viewLifecycleOwner) { isVisible ->
-//            binding.deductionRv.visibility = if (isVisible) View.VISIBLE else View.GONE
-//        }
-
     }
 }
