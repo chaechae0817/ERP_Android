@@ -14,7 +14,7 @@
 
 ## 기술 스택
 
-- **Android**: Kotlin, Kotlin , Firebase Cloud Messaging , View binding , SharedPreferences , Glide, Retrofit
+- **Android**: Kotlin, Firebase Cloud Messaging , View binding , SharedPreferences , Glide, Retrofit
 - **Backend**: Java, Spring boot, MariaDB
 
 ## 서비스 UI
