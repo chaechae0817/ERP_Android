@@ -23,3 +23,4 @@ ERP 인사관리시스템의 직원 출퇴근 관리를 위한 QR 생성 어플�
 
 
 ## 서비스 UI
+<img src = "images/appinfo_1.png" width ="30%" /> <img src = "images/appinfo_2.png" width= "30%"/>
